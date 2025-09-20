@@ -1,5 +1,5 @@
 const WHATSAPP_API_URL = 'https://api.whatsapp.com/send';
-export const DEFAULT_PHONE = '1122684646';
+export const DEFAULT_PHONE = '1133675227';
 
 export function buildWhatsAppUrl(phone: string, message: string): string {
   const encoded = encodeURIComponent(message);

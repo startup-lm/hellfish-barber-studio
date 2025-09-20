@@ -50,7 +50,7 @@ export default async function NosotrosPage() {
               <GoogleMapsLocation />
             </div>
             <div className="relative h-64 w-full rounded-xl overflow-hidden">
-              <Image src="/images/local_hooligans.png" alt="Local Hooligans" fill className="object-cover" />
+              <Image src="/images/local.jpg" alt="Local Hellfish Barberstudio" fill className="object-cover" />
             </div>
           </div>
         </section>

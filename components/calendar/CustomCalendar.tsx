@@ -40,6 +40,14 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
     );
   }
 
+  const isLunchBreak = (d: Date) => {
+    const start = new Date(d);
+    start.setHours(13, 30, 0, 0);
+    const end = new Date(d);
+    end.setHours(15, 0, 0, 0);
+    return d >= start && d < end;
+  };
+
   return (
     <div className="space-y-4">
       {isMobile && (
@@ -74,6 +82,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
           onSelectSlot={(slotInfo: SlotInfo) => {
             const todayStart = new Date();
             if (slotInfo.start < todayStart && role === "guest") return;
+            if (isLunchBreak(slotInfo.start)) return;
             if (events.some(ev => slotInfo.start >= ev.start && slotInfo.start < ev.end))
               return;
             const appt: Appointment = {
@@ -120,7 +129,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
               ? { className: 'rbc-disabled-day', style: { pointerEvents: 'none', opacity: 0.5 } } : {}
           }
           slotPropGetter={date =>
-            date.getHours() < 11
+            date.getHours() < 10 || isLunchBreak(date)
               ? { style: { pointerEvents: 'none', backgroundColor: 'var(--button-home-disabled)', opacity: 0.6, }, } : {}
           }
           messages={{ month: 'Month', week: 'Semana', day: 'Día', previous: 'Atrás', next: 'Siguiente', today: 'Hoy', date: 'Fecha', time: 'Hora', event: 'Turno', }}

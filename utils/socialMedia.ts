@@ -5,7 +5,7 @@ export const socialMediaList = [
   {
     name: "instagram",
     Icon: FaInstagram,
-    url: "https://instagram.com/hooligansbarberia_",
+    url: "https://instagram.com/hellfishbarberstudio",
     text: "Contáctanos por Instagram",
   },
   {
@@ -20,14 +20,14 @@ export const socialMediaList = [
   {
     name: "facebook",
     Icon: FaFacebook,
-    url: "https://www.facebook.com/profile.php?id=61561324966379",
+    url: "https://www.facebook.com/hellfish.barberstudio?locale=es_LA",
     text: "Contáctanos por Facebook",
   },
   {
     name: "gmail",
     Icon: FaEnvelope,
     url:
-      "mailto:hooligansbarberia1@gmail.com?subject=Consulta%20de%20turno&body=Hola%2C%20quiero%20consultar%20por%20un%20turno%20en%20la%20barbería.",
+      "mailto:hellfish.barberstudio@gmail.com?subject=Consulta%20de%20turno&body=Hola%2C%20quiero%20consultar%20por%20un%20turno%20en%20la%20barbería.",
     text: "Contáctanos por Gmail",
   },
 ];
