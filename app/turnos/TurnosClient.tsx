@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Spinner from "@/components/loading/Spinner";
 import { Barber } from "@/lib/types/Barbers";
@@ -9,17 +9,26 @@ import { useAuth } from "@/lib/auth/AuthContext";
 import BarberCheckbox from "@/components/turnos/BarberCheckbox";
 import { CalendarEvent } from "@/lib/types/CalendarEvent";
 
-const CustomCalendar = dynamic(() => import("@/components/calendar/CustomCalendar"), { ssr: false, loading: () => (<div className="h-96 flex items-center justify-center"><Spinner /></div>), });
+const CustomCalendar = dynamic(() => import("@/components/calendar/CustomCalendar"), { ssr: false, loading: () => (<div className="h-96 flex items-center justify-center"><Spinner /></div>) });
 const ReservarModal = dynamic(() => import("@/components/turnos/ReservarModal"), { ssr: false, loading: () => null });
 const AppointmentDetailsModal = dynamic(() => import("@/components/turnos/AppointmentDetailsModal"), { ssr: false, loading: () => null });
 
-interface Props {
-  initialBarbers: Barber[];
-}
+interface Props { initialBarbers: Barber[]; }
 
 export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
   const { barberId, role } = useAuth();
-  const [selectedBarberId, setSelectedBarberId] = useState(barberId);
+  const [selectedBarberId, setSelectedBarberId] = useState<number>(-1);
+  useEffect(() => {
+    if (role === "guest") {
+      const unico = initialBarbers.length === 1 ? initialBarbers[0] : null;
+      setSelectedBarberId(unico?.id != null ? unico.id! : -1);
+    } else {
+      setSelectedBarberId(
+        typeof barberId === "number" && barberId >= 0 ? barberId : -1
+      );
+    }
+  }, [role, barberId, initialBarbers]);
+
   const [isReservarOpen, setIsReservarOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
@@ -39,6 +48,8 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
     }
   };
 
+  const isBarberSelected = Number.isInteger(selectedBarberId) && selectedBarberId >= 0;
+
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-5 text-center">Reserva tu turno</h1>
@@ -55,8 +66,7 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
           />
         </div>
 
-
-        <div className={selectedBarberId < 0 ? "opacity-50 pointer-events-none" : ""} >
+        <div className={!isBarberSelected ? "opacity-50 pointer-events-none" : ""}>
           <div className="sm:hidden">
             <CustomCalendar
               selectedBarberId={selectedBarberId}
@@ -81,9 +91,7 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
           <ReservarModal
             onClose={() => setIsReservarOpen(false)}
             selectedDate={selectedDate}
-            selectedBarber={
-              initialBarbers.find((b) => b.id === selectedBarberId)?.name || ""
-            }
+            selectedBarber={initialBarbers.find((b) => b.id === selectedBarberId)?.name || ""}
             selectedBarberId={selectedBarberId}
             events={events}
           />
