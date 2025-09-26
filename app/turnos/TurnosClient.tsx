@@ -19,14 +19,8 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
   const { barberId, role } = useAuth();
   const [selectedBarberId, setSelectedBarberId] = useState<number>(-1);
   useEffect(() => {
-    if (role === "guest") {
-      const unico = initialBarbers.length === 1 ? initialBarbers[0] : null;
-      setSelectedBarberId(unico?.id != null ? unico.id! : -1);
-    } else {
-      setSelectedBarberId(
-        typeof barberId === "number" && barberId >= 0 ? barberId : -1
-      );
-    }
+    if (role === "guest") setSelectedBarberId(initialBarbers.length === 1 ? (initialBarbers[0]?.id ?? -1) : -1);
+    else setSelectedBarberId(barberId >= 0 ? barberId : -1);
   }, [role, barberId, initialBarbers]);
 
   const [isReservarOpen, setIsReservarOpen] = useState(false);
@@ -48,8 +42,6 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
     }
   };
 
-  const isBarberSelected = Number.isInteger(selectedBarberId) && selectedBarberId >= 0;
-
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-5 text-center">Reserva tu turno</h1>
@@ -66,7 +58,7 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
           />
         </div>
 
-        <div className={!isBarberSelected ? "opacity-50 pointer-events-none" : ""}>
+        <div className={selectedBarberId < 0 ? "opacity-50 pointer-events-none" : ""} >
           <div className="sm:hidden">
             <CustomCalendar
               selectedBarberId={selectedBarberId}
