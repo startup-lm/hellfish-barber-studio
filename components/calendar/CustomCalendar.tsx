@@ -72,7 +72,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
           selectable
           popup={isMobile}
           longPressThreshold={0}
-          step={15}
+          step={30}
           timeslots={1}
           min={minTime}
           max={maxTime}

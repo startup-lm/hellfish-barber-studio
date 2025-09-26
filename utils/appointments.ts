@@ -2,18 +2,21 @@ import { Appointment } from "@/lib/types/Appointment";
 import { CalendarEvent } from "@/lib/types/CalendarEvent";
 
 export function generateAllAppointments() {
-  const horarios = [];
-  const inicio = 11;
-  const fin = 20;
+  const horarios: string[] = [];
+  const step = 30;
+  const first = 10 * 60 + 30;
+  const lastStart = 18 * 60 + 30;
+  const breakStart = 13 * 60 + 30;
+  const breakEnd = 15 * 60;
 
-  for (let hora = inicio; hora < fin; hora++) {
-    horarios.push(`${hora}:00`);
-    horarios.push(`${hora}:15`);
-    horarios.push(`${hora}:30`);
-    horarios.push(`${hora}:45`);
+  for (let m = first; m <= lastStart; m += step) {
+    if (m >= breakStart && m < breakEnd) continue;
+    const hh = String(Math.floor(m / 60)).padStart(2, "0");
+    const mm = String(m % 60).padStart(2, "0");
+    horarios.push(`${hh}:${mm}`);
   }
   return horarios;
-};
+}
 
 export const transformAppointmentsToEvents = (appointments: Appointment[],role: string): CalendarEvent[] => {
   return appointments.map(appt => {
