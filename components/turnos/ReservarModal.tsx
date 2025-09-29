@@ -41,14 +41,14 @@ export default function ReservarModal({ onClose, selectedDate, selectedBarber, s
     endDate.setMinutes(endDate.getMinutes() + duration);
     if (isGuest) {
       const cierre = new Date(selectedDate);
-      cierre.setHours(19, 0, 0, 0);
+      cierre.setHours(20, 0, 0, 0);
       const startBreak = new Date(selectedDate);
-      startBreak.setHours(13, 30, 0, 0);
+      startBreak.setHours(14, 0, 0, 0);
       const endBreak = new Date(selectedDate);
       endBreak.setHours(15, 0, 0, 0);
       console.log({ selectedDate, endDate, cierre, startBreak, endBreak });
       if (endDate > cierre || (endDate < endBreak && endDate > startBreak)) {
-        popup.open(`No se puede reservar: el turno finaliza dentro del horario de cierre (13:30-15:00) o después de las 19:00 hs.`, false);
+        popup.open(`No se puede reservar: el turno finaliza dentro del horario de cierre (14:00-15:00) o después de las 20 hs.`, false);
         setLoading(false);
         return;
       }

@@ -1,4 +1,4 @@
-import {FaInstagram,FaWhatsapp,FaFacebook,FaEnvelope,} from "react-icons/fa";
+import {FaInstagram,FaWhatsapp,FaFacebook,} from "react-icons/fa";
 import { buildWhatsAppUrl, DEFAULT_PHONE } from "@/utils/whatsapp";
 
 export const socialMediaList = [
@@ -23,11 +23,11 @@ export const socialMediaList = [
     url: "https://www.facebook.com/hellfish.barberstudio?locale=es_LA",
     text: "Contáctanos por Facebook",
   },
-  {
-    name: "gmail",
-    Icon: FaEnvelope,
-    url:
-      "mailto:hellfish.barberstudio@gmail.com?subject=Consulta%20de%20turno&body=Hola%2C%20quiero%20consultar%20por%20un%20turno%20en%20la%20barbería.",
-    text: "Contáctanos por Gmail",
-  },
+  // {
+  //   name: "gmail",
+  //   Icon: FaEnvelope,
+  //   url:
+  //     "mailto:hellfish.barberstudio@gmail.com?subject=Consulta%20de%20turno&body=Hola%2C%20quiero%20consultar%20por%20un%20turno%20en%20la%20barbería.",
+  //   text: "Contáctanos por Gmail",
+  // },
 ];

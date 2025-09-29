@@ -42,7 +42,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
 
   const isLunchBreak = (d: Date) => {
     const start = new Date(d);
-    start.setHours(13, 30, 0, 0);
+    start.setHours(14, 0, 0, 0);
     const end = new Date(d);
     end.setHours(15, 0, 0, 0);
     return d >= start && d < end;
