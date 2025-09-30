@@ -5,10 +5,9 @@ export function generateAllAppointments() {
   const horarios: string[] = [];
   const step = 30;
   const first = 10 * 60 + 30;
-  const lastStart = 18 * 60 + 30;
-  const breakStart = 13 * 60 + 30;
+  const lastStart = 19 * 60 + 30;
+  const breakStart = 14 * 60;
   const breakEnd = 15 * 60;
-
   for (let m = first; m <= lastStart; m += step) {
     if (m >= breakStart && m < breakEnd) continue;
     const hh = String(Math.floor(m / 60)).padStart(2, "0");
