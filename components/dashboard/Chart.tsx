@@ -19,10 +19,10 @@ export default function Chart({ data }: Readonly<{ data: DataPoint[]; }>) {
           />
           <Tooltip
             wrapperStyle={{
-              backgroundColor: "#f0f0f0",
+              backgroundColor: "var(--background)",
               borderRadius: "5px",
-              border: "1px solid var(--secondary)",
-              color: "black",
+              border: "1px solid var(--accent)",
+              color: "var(--foreground)",
               padding: "0.5rem",
             }}
             formatter={(_, __, { payload }) => {

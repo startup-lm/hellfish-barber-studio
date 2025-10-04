@@ -1,44 +1,51 @@
 :root {
-  --background: #1A1A1A;
+  /* NEGRO PRINCIPAL */
+  --background: #0A0A0A;
+  --primary: #000000;
+  --bg-navbar: #000000;
+  
+  /* BLANCO CONTRASTE */
   --foreground: #FFFFFF;
-
-  --primary: #5B3A29;
-  --secondary: #EDE0C8;
-  --accent: #D2B48C;
-  --accent-red: #C1272D;
-  --accent-blue: #1E90FF;
-
-  --heading-color: var(--secondary);
-
+  --secondary: #FFFFFF;
+  --heading-color: var(--foreground);
   --button-bg: var(--secondary);
   --button-text: var(--primary);
-  --button-hover: #C0A070;
-
-  --button-home-primary-bg: var(--primary) ;
   --button-home-primary-text: #FFFFFF;
-  --button-home-primary-hover: var(--secondary);
-
+  
+  /* GRIS DETALLES */
+  --accent: #6B7280;
+  --accent-blue: #6B7280;
+  --button-hover: #F3F4F6;
+  --bg-carousel: #1F1F1F;
   --button-home-secondary-bg: var(--secondary);
-  --button-home-secondary-text: var(--primary) ;
-  --button-home-secondary-hover: var(--primary) ;
-
-  --bg-carousel: #2A2A2A;
-  --bg-navbar: #252525;
-
-  --button-green: #22c55e;
-  --button-green-hover: #16a34a;
-
-  --button-whatsapp: #25d366;
-  --button-whatsapp-hover: #128c7e;
-
-  --button-home-disabled: #d1d5db;
-  --button-home-disabled-text: #6b7280;
+  --button-home-secondary-text: var(--primary);
+  --button-home-secondary-hover: #F3F4F6;
+  --button-home-disabled: #6B7280;
+  --button-home-disabled-text: #9CA3AF;
+  
+  /* ROJO RESALTADO */
+  --accent-red: #EF4444;
+  --button-home-primary-bg: #EF4444;
+  --button-home-primary-hover: #DC2626;
+  
+  /* VERDES FUNCIONALES */
+  --button-green: #10B981;
+  --button-green-hover: #059669;
+  
+  /* WHATSAPP */
+  --button-whatsapp: #25D366;
+  --button-whatsapp-hover: #128C7E;
+  
+  /* CALENDAR SPECIFIC COLORS */
+  --calendar-disabled-day: #374151;
+  --calendar-disabled-slot: #4B5563;
+  --calendar-non-appointment: #9CA3AF;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1A1A1A;
-    --foreground: #EDEDED;
-    --heading-color: #EDEDED;
+    --background: #0A0A0A;
+    --foreground: #FFFFFF;
+    --heading-color: #FFFFFF;
   }
 }
