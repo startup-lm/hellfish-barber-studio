@@ -42,7 +42,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
 
   const isLunchBreak = (d: Date) => {
     const start = new Date(d);
-    start.setHours(13, 30, 0, 0);
+    start.setHours(14, 0, 0, 0);
     const end = new Date(d);
     end.setHours(15, 0, 0, 0);
     return d >= start && d < end;
@@ -107,11 +107,11 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
           onNavigate={onNavigate}
           eventPropGetter={ev => {
             let backgroundColor: string;
-            if (role === 'guest') backgroundColor = '#A42126';
+            if (role === 'guest') backgroundColor = '#EF4444';
             else {
-              if (!ev.isAppt) backgroundColor = '#B0B0B0';
-              else if (!ev.paid) backgroundColor = '#A42126';
-              else backgroundColor = '#1CA74F';
+              if (!ev.isAppt) backgroundColor = 'var(--calendar-non-appointment)';
+              else if (!ev.paid) backgroundColor = '#EF4444';
+              else backgroundColor = '#10B981';
             }
             return {
               style: {
@@ -130,7 +130,7 @@ export default function CustomCalendar({ selectedBarberId, role, isMobile, onSlo
           }
           slotPropGetter={date =>
             date.getHours() < 10 || isLunchBreak(date)
-              ? { style: { pointerEvents: 'none', backgroundColor: 'var(--button-home-disabled)', opacity: 0.6, }, } : {}
+              ? { style: { pointerEvents: 'none', backgroundColor: 'var(--calendar-disabled-slot)', opacity: 0.8, }, } : {}
           }
           messages={{ month: 'Month', week: 'Semana', day: 'Día', previous: 'Atrás', next: 'Siguiente', today: 'Hoy', date: 'Fecha', time: 'Hora', event: 'Turno', }}
           formats={formats}

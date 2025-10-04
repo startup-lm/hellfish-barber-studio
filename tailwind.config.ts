@@ -5,9 +5,9 @@ const config: Config = {
     extend: {
       colors: {
         platense: {
-          DEFAULT: "#5A3E1B",
-          dark: "#3E2B17",
-          light: "#D2B48C",
+          DEFAULT: "#000000",
+          dark: "#0A0A0A",
+          light: "#6B7280",
         },
       },
     },
