@@ -8,16 +8,26 @@ import { Appointment } from "@/lib/types/Appointment";
 import { useAuth } from "@/lib/auth/AuthContext";
 import BarberCheckbox from "@/components/turnos/BarberCheckbox";
 import { CalendarEvent } from "@/lib/types/CalendarEvent";
+import { GlobalHours } from "@/lib/types/BusinessHours";
+import { BusinessSettings } from "@/lib/types/BusinessSettings";
 
-const CustomCalendar = dynamic(() => import("@/components/calendar/CustomCalendar"), { ssr: false, loading: () => (<div className="h-96 flex items-center justify-center"><Spinner /></div>) });
+const CustomCalendar = dynamic(() => import("@/components/calendar/CustomCalendar"), {
+  ssr: false,
+  loading: () => (<div className="h-96 flex items-center justify-center"><Spinner /></div>)
+});
 const ReservarModal = dynamic(() => import("@/components/turnos/ReservarModal"), { ssr: false, loading: () => null });
 const AppointmentDetailsModal = dynamic(() => import("@/components/turnos/AppointmentDetailsModal"), { ssr: false, loading: () => null });
 
-interface Props { initialBarbers: Barber[]; }
+interface Props {
+  initialBarbers: Barber[];
+  businessHours: GlobalHours;
+  businessSettings: BusinessSettings;
+}
 
-export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
+export default function TurnosClient({ initialBarbers, businessHours, businessSettings }: Readonly<Props>) {
   const { barberId, role } = useAuth();
   const [selectedBarberId, setSelectedBarberId] = useState<number>(-1);
+
   useEffect(() => {
     if (role === "guest") setSelectedBarberId(initialBarbers.length === 1 ? (initialBarbers[0]?.id ?? -1) : -1);
     else setSelectedBarberId(barberId >= 0 ? barberId : -1);
@@ -29,9 +39,9 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
 
-  const handleSlotClick = (appt: Appointment, events: CalendarEvent[]) => {
+  const handleSlotClick = (appt: Appointment, evs: CalendarEvent[]) => {
     setSelectedDate(new Date(`${appt.date}T${appt.start_time}:00-03:00`));
-    setEvents(events);
+    setEvents(evs);
     setIsReservarOpen(true);
   };
 
@@ -58,7 +68,7 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
           />
         </div>
 
-        <div className={selectedBarberId < 0 ? "opacity-50 pointer-events-none" : ""} >
+        <div className={selectedBarberId < 0 ? "opacity-50 pointer-events-none" : ""}>
           <div className="sm:hidden">
             <CustomCalendar
               selectedBarberId={selectedBarberId}
@@ -66,6 +76,8 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
               isMobile={true}
               onSlotClick={handleSlotClick}
               onEventClick={handleEventClick}
+              businessHours={businessHours}
+              businessSettings={businessSettings}
             />
           </div>
           <div className="hidden sm:block">
@@ -75,6 +87,8 @@ export default function TurnosClient({ initialBarbers }: Readonly<Props>) {
               isMobile={false}
               onSlotClick={handleSlotClick}
               onEventClick={handleEventClick}
+              businessHours={businessHours}
+              businessSettings={businessSettings}
             />
           </div>
         </div>
