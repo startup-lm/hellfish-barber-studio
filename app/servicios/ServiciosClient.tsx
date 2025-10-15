@@ -55,6 +55,7 @@ export default function ServiciosClient({ services }: Readonly<Props>) {
                   setSelectedId(svc.id);
                   setConfirmModal(true);
                 }}
+                onCardClick={() => router.push("/turnos")}
               />
             </div>
           )
