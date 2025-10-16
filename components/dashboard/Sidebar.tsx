@@ -20,7 +20,7 @@ export default function Sidebar({barbers,selectedBarberId,onBarberChange,startDa
   return (
     <div className="relative">
 
-      <button onClick={() => setIsOpen(!isOpen)} className="absolute top-2 right-2 text-xl px-2 py-1 rounded !bg-[var(--primary)] hover:bg-[var(--secondary)] hover:text-black !text-black transition z-10 hidden md:block" >
+      <button onClick={() => setIsOpen(!isOpen)} className="absolute top-2 right-2 text-xl px-2 py-1 rounded !bg-[var(--accent)] hover:bg-[var(--secondary)] hover:text-black !text-white transition z-10 hidden md:block" >
         {isOpen ? "←" : "☰"}
       </button>
 
